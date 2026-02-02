@@ -11,17 +11,14 @@ import '../General Widgets/input_field.dart';
 import '../General Widgets/horizontal_separator.dart';
 import '../General Widgets/link_text.dart';
 
-import 'sinup.dart';
-import 'forget_password.dart';
-
-class LogInScreen extends StatefulWidget {
-  const LogInScreen({super.key});
+class SignUpScreen extends StatefulWidget {
+  const SignUpScreen({super.key});
 
   @override
-  State<LogInScreen> createState() => _LogInScreenState();
+  State<SignUpScreen> createState() => _SignUpScreenState();
 }
 
-class _LogInScreenState extends State<LogInScreen> {
+class _SignUpScreenState extends State<SignUpScreen> {
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -45,7 +42,7 @@ class _LogInScreenState extends State<LogInScreen> {
               Align(
                 alignment: AlignmentGeometry.centerLeft,
                 child: Text(
-                  AppLocalizations.of(context)!.loginToYourAccount,
+                  AppLocalizations.of(context)!.createYourAccount,
                   style: Theme.of(context).primaryTextTheme.bodyLarge!.copyWith(
                     color: setting.theme ? lightMainColor : darkMainText,
                     fontSize: 24,
@@ -54,41 +51,46 @@ class _LogInScreenState extends State<LogInScreen> {
               ),
               HorizontalSpacer(h: 24),
               InputField(
-                iconPath: emailIcon,
-                hintText: AppLocalizations.of(context)!.enterYourEmail,
+                iconPath: userIcon,
+                hintText: AppLocalizations.of(context)!.enterYourName,
                 validator: (v) {},
               ),
               HorizontalSpacer(h: 16),
               InputField(
-                iconPath: passwordIcon,
+                iconPath: emailIcon,
                 suffix: Icon(Icons.visibility_off_outlined),
+                hintText: AppLocalizations.of(context)!.enterYourName,
+                validator: (v) {},
+              ),
+
+              HorizontalSpacer(h: 24),
+              InputField(
+                iconPath: emailIcon,
                 hintText: AppLocalizations.of(context)!.enterYourPassword,
                 validator: (v) {},
               ),
-              HorizontalSpacer(h: 8),
-              Align(
-                alignment: AlignmentGeometry.centerRight,
-                child: LinkText(
-                  action: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=>ForgetPasswordScreen()));
-                  },
-                  text: AppLocalizations.of(context)!.forgetPassword,
-                ),
+
+              HorizontalSpacer(h: 24),
+              InputField(
+                iconPath: emailIcon,
+                hintText: AppLocalizations.of(context)!.enterYourPassword,
+                validator: (v) {},
               ),
-              HorizontalSpacer(h: 47),
+
+              HorizontalSpacer(h: 52),
               FilledTextButton(
                 action: () {},
-                text: AppLocalizations.of(context)!.login,
+                text: AppLocalizations.of(context)!.signup,
               ),
               HorizontalSpacer(h: 48),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(AppLocalizations.of(context)!.doNotHaveAnAccount,style: TextStyle(fontSize: 14,fontWeight: FontWeight.w400,color: setting.theme?Color(0xff1c1c1c):darkSecText),),
+                  Text(AppLocalizations.of(context)!.alreadyHaveAnAccount,style: TextStyle(fontSize: 14,fontWeight: FontWeight.w400,color: setting.theme?Color(0xff1c1c1c):darkSecText),),
                   LinkText(
-                    text: AppLocalizations.of(context)!.signup,
+                    text: AppLocalizations.of(context)!.login,
                     action: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>SignUpScreen()));
+                      Navigator.pop(context);
                     },
                   ),
                 ],
@@ -99,7 +101,7 @@ class _LogInScreenState extends State<LogInScreen> {
                 children: [
                   Expanded(child: Divider()),
                   Text(AppLocalizations.of(context)!.or,
-                  style: TextStyle(fontSize: 16,fontWeight: FontWeight.w500,color:mainColor)
+                  style: TextStyle(fontSize: 16,fontWeight: FontWeight.w500,color:mainColor),
                   ),
                   Expanded(child: Divider()),
                 ],
@@ -107,31 +109,31 @@ class _LogInScreenState extends State<LogInScreen> {
               HorizontalSpacer(h: 24),
 
               FilledButton(
-                onPressed: () {},
-                style: Theme.of(context).filledButtonTheme.style!.copyWith(
-                  backgroundColor: WidgetStatePropertyAll(input),
-                  shape: WidgetStatePropertyAll(
-                    RoundedRectangleBorder(side: BorderSide(color: stroke),borderRadius: BorderRadiusGeometry.all(Radius.circular(16))),
+                  onPressed: () {},
+                  style: Theme.of(context).filledButtonTheme.style!.copyWith(
+                    backgroundColor: WidgetStatePropertyAll(input),
+                    shape: WidgetStatePropertyAll(
+                      RoundedRectangleBorder(side: BorderSide(color: stroke),borderRadius: BorderRadiusGeometry.all(Radius.circular(16))),
+                    ),
+                    padding: WidgetStatePropertyAll(EdgeInsetsGeometry.all(widthOf(16, context))),
                   ),
-                  padding: WidgetStatePropertyAll(EdgeInsetsGeometry.all(widthOf(16, context))),
-                ),
-                child: Center(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    spacing: widthOf(16, context),
-                    children: [
-                      Image.asset(googleIcon,height: heightOf(24, context),),
-                      Text(
-                        AppLocalizations.of(context)!.signUpWithGoogle,
-                        style: TextStyle(
-                          color: mainColor,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w500,
+                  child: Center(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      spacing: widthOf(16, context),
+                      children: [
+                        Image.asset(googleIcon,height: heightOf(24, context),),
+                        Text(
+                          AppLocalizations.of(context)!.signUpWithGoogle,
+                          style: TextStyle(
+                            color: mainColor,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                )
+                      ],
+                    ),
+                  )
               ),
             ],
           ),

@@ -2,15 +2,20 @@ import 'package:flutter/material.dart';
 import 'l10n/app_localizations.dart';
 //External Packages
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 //providers
 import 'Providers/settings_provider.dart';
 //screens
 import 'Onboarding/onboarding.dart';
+import 'Authentication/log_in.dart';
 //theme
 import 'theme.dart';
 //utilities
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  SharedPreferences db = await SharedPreferences.getInstance();
+  setting = SettingsProvider(db);
   runApp(MultiProvider(
     providers: [
       ChangeNotifierProvider.value(value: setting),
@@ -31,7 +36,8 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
+      title: 'Evently',
       theme: appLightTheme,
       darkTheme: appDarkTheme,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
@@ -41,7 +47,7 @@ class _MyAppState extends State<MyApp> {
         Locale('ar'), // Arabic
       ],
       themeMode: context.watch<SettingsProvider>().theme?ThemeMode.light:ThemeMode.dark,
-      home: OnboardingMain(),
+      home: setting.onboarding?OnboardingMain():LogInScreen(),
     );
   }
 }

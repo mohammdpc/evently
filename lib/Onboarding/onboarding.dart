@@ -20,7 +20,7 @@ class _OnboardingMainState extends State<OnboardingMain> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Image.asset(evently, width: screenWidth(context) * 0.378666667),
+        title: Image.asset(evently, width: screenWidth(context) * 0.378666667,color: mainColor),
         centerTitle: true,
       ),
       body: Padding(
@@ -218,7 +218,6 @@ class _OnboardingSlidesState extends State<OnboardingSlides> {
       AppLocalizations.of(context)!.onboardingText3,
     ];
     List<String> imageList = [onboarding1, onboarding2, onboarding3];
-
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -277,7 +276,7 @@ class _OnboardingSlidesState extends State<OnboardingSlides> {
                           ),
                   ),
         
-                  Image.asset(evently, width: screenWidth(context) * 0.378666667),
+                  Image.asset(evently, width: screenWidth(context) * 0.378666667,color: mainColor),
         
                   SizedBox(
                     width: screenWidth(context) * 0.168,
@@ -373,6 +372,7 @@ class _OnboardingSlidesState extends State<OnboardingSlides> {
                     );
                     setState(() {});
                   } else {
+                    setting.onBoarding();
                     Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(builder: (context) => LogInScreen()),
@@ -384,6 +384,7 @@ class _OnboardingSlidesState extends State<OnboardingSlides> {
                     pageIndex == 2
                         ? AppLocalizations.of(context)!.getStarted
                         : AppLocalizations.of(context)!.next,
+                    style: Theme.of(context).primaryTextTheme.labelLarge,
                   ),
                 ),
               ),

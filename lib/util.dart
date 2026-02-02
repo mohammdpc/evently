@@ -5,6 +5,9 @@ import'Providers/settings_provider.dart';
 double screenWidth(BuildContext context)=>MediaQuery.of(context).size.width;
 double screenHeight(BuildContext context)=>MediaQuery.of(context).size.height;
 
+double widthOf(double width,BuildContext context)=>screenWidth(context)*(width/375);
+double heightOf(double height,BuildContext context)=>screenHeight(context)*(height/812);
+
 //light
 Color lightMainColor = Color(0xff0E3A99);
 Color lightDisable = Color(0xffB9B9B9);
@@ -37,9 +40,15 @@ Color? get imageColor=>setting.theme?null:darkMainText;
 
 
 //icons
+  //onboarding
 String sun = 'assets/icons/sun.png';
 String moon = 'assets/icons/Vector.png';
 String moonFilled = 'assets/icons/moon.png';
+  //Authentication
+String emailIcon = 'assets/icons/sms.png';
+String passwordIcon = 'assets/icons/lock.png';
+String userIcon = 'assets/icons/user.png';
+String googleIcon = 'assets/icons/image 6.png';
 
 // images paths
   //Onboarding images
@@ -48,3 +57,5 @@ String onboardingHome = 'assets/images/being-creative.png';
 String onboarding1 = 'assets/images/hot-trending.png';
 String onboarding2 = 'assets/images/being-creative-1.png';
 String onboarding3 = 'assets/images/being-creative-2.png';
+  //Authentication
+String forgotPasswordImage = 'assets/images/change-setting.png';
