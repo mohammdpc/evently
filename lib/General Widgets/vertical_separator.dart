@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import '../util.dart';
-class HorizontalSpacer extends StatelessWidget {
+class VerticalSpacer extends StatelessWidget {
   final double h;
-  const HorizontalSpacer({super.key,required this.h});
+  const VerticalSpacer({super.key,required this.h});
 
   @override
   Widget build(BuildContext context) {
