@@ -28,5 +28,19 @@
   "alreadyHaveAnAccount": "هل لديك حساب بالفعل؟",
   "signUpWithGoogle": "سجّل الدخول باستخدام حساب جوجل",
   "resetPassword": "أعد تعيين كلمة المرور",
-  "or": "أو"
+  "or": "أو",
+
+  "welcomBack":"مرحباً بعودتك ✨",
+    "all":"الكل",
+    "sport":"الرياضة",
+    "bookClub":"نادي الكتاب",
+    "birthday":"عيد ميلاد",
+    "meeting":"اجتماع",
+    "exhibition":"معرض",
+
+    "home":"الرئيسية",
+    "favourite":"المفضلة",
+    "profile":"الملف الشخصي",
+
+    "searchForEvent":"البحث عن فعالية"
 }

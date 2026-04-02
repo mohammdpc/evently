@@ -4,24 +4,33 @@ import 'l10n/app_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'firebase_options.dart';
+import 'package:firebase_core/firebase_core.dart';
+
 //providers
 import 'Providers/settings_provider.dart';
 //screens
 import 'Onboarding/onboarding.dart';
 import 'Authentication/log_in.dart';
+import 'Main Screens/main_screen.dart';
 //theme
 import 'theme.dart';
+
 //utilities
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  //FirebaseAuth.instance;
+
   SharedPreferences db = await SharedPreferences.getInstance();
   setting = SettingsProvider(db);
-  runApp(MultiProvider(
-    providers: [
-      ChangeNotifierProvider.value(value: setting),
-    ],
-    child: const MyApp(),
-  ),);
+  runApp(
+    MultiProvider(
+      providers: [ChangeNotifierProvider.value(value: setting)],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatefulWidget {
@@ -33,6 +42,17 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   // This widget is the root of your application.
+  Widget mainPage() {
+
+    if (setting.onboarding) {
+      return OnboardingMain();
+    } else if(setting.user == null){
+      return LogInScreen();
+    }else{
+      return MainScreen();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -41,13 +61,15 @@ class _MyAppState extends State<MyApp> {
       theme: appLightTheme,
       darkTheme: appDarkTheme,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
-      locale: setting.language?Locale('en'):Locale('ar'),
+      locale: setting.language ? Locale('en') : Locale('ar'),
       supportedLocales: [
         Locale('en'), // English
         Locale('ar'), // Arabic
       ],
-      themeMode: context.watch<SettingsProvider>().theme?ThemeMode.light:ThemeMode.dark,
-      home: setting.onboarding?OnboardingMain():LogInScreen(),
+      themeMode: context.watch<SettingsProvider>().theme
+          ? ThemeMode.light
+          : ThemeMode.dark,
+      home: mainPage(),
     );
   }
 }

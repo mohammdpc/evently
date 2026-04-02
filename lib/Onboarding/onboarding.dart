@@ -8,6 +8,8 @@ import '../Providers/settings_provider.dart';
 
 import '../Authentication/log_in.dart';
 
+import '../General Widgets/custom_back_button.dart';
+
 class OnboardingMain extends StatefulWidget {
   const OnboardingMain({super.key});
 
@@ -20,7 +22,11 @@ class _OnboardingMainState extends State<OnboardingMain> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Image.asset(evently, width: screenWidth(context) * 0.378666667,color: mainColor),
+        title: Image.asset(
+          evently,
+          width: screenWidth(context) * 0.378666667,
+          color: mainColor,
+        ),
         centerTitle: true,
       ),
       body: Padding(
@@ -221,7 +227,11 @@ class _OnboardingSlidesState extends State<OnboardingSlides> {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.only(top:  screenWidth(context) * 0.042666667,left: screenWidth(context) * 0.042666667,right: screenWidth(context) * 0.042666667),
+          padding: EdgeInsets.only(
+            top: screenWidth(context) * 0.042666667,
+            left: screenWidth(context) * 0.042666667,
+            right: screenWidth(context) * 0.042666667,
+          ),
           child: Column(
             spacing: screenHeight(context) * 0.02955665,
             children: [
@@ -233,28 +243,8 @@ class _OnboardingSlidesState extends State<OnboardingSlides> {
                     height: screenWidth(context) * 0.085333333,
                     child: pageIndex == 0
                         ? null
-                        : FilledButton(
-                            style: Theme.of(context).filledButtonTheme.style!
-                                .copyWith(
-                                  padding: WidgetStatePropertyAll(
-                                    EdgeInsets.symmetric(
-                                      horizontal:
-                                          screenWidth(context) * 0.029333333,
-                                      vertical:
-                                          screenHeight(context) * 0.009852217,
-                                    ),
-                                  ),
-                                  backgroundColor: WidgetStatePropertyAll(input),
-                                  shape: WidgetStatePropertyAll(
-                                    RoundedRectangleBorder(
-                                      borderRadius: BorderRadiusGeometry.all(
-                                        Radius.circular(8),
-                                      ),
-                                      side: BorderSide(color: stroke),
-                                    ),
-                                  ),
-                                ),
-                            onPressed: () {
+                        : CustomBackButton(
+                            action: () {
                               pageIndex -= 1;
                               pageController.animateToPage(
                                 pageIndex,
@@ -268,58 +258,65 @@ class _OnboardingSlidesState extends State<OnboardingSlides> {
                               );
                               setState(() {});
                             },
-                            child: Icon(
-                              Icons.arrow_back_ios,
-                              color: setting.theme ? mainColor : lightInput,
-                              weight: screenWidth(context) * 0.018933333,
-                            ),
                           ),
                   ),
-        
-                  Image.asset(evently, width: screenWidth(context) * 0.378666667,color: mainColor),
-        
+
+                  Image.asset(
+                    evently,
+                    width: screenWidth(context) * 0.378666667,
+                    color: mainColor,
+                  ),
+
                   SizedBox(
                     width: screenWidth(context) * 0.168,
                     height: screenWidth(context) * 0.085333333,
                     child: pageIndex == 2
                         ? null
                         : FilledButton(
-                      style: Theme.of(context).filledButtonTheme.style!
-                          .copyWith(
-                        padding: WidgetStatePropertyAll(
-                          EdgeInsets.symmetric(
-                            horizontal:
-                            screenWidth(context) * 0.029333333,
-                            vertical:
-                            screenHeight(context) * 0.009852217,
-                          ),
-                        ),
-                        backgroundColor: WidgetStatePropertyAll(input),
-                        shape: WidgetStatePropertyAll(
-                          RoundedRectangleBorder(
-                            borderRadius: BorderRadiusGeometry.all(
-                              Radius.circular(8),
+                            style: Theme.of(context).filledButtonTheme.style!
+                                .copyWith(
+                                  padding: WidgetStatePropertyAll(
+                                    EdgeInsets.symmetric(
+                                      horizontal:
+                                          screenWidth(context) * 0.029333333,
+                                      vertical:
+                                          screenHeight(context) * 0.009852217,
+                                    ),
+                                  ),
+                                  backgroundColor: WidgetStatePropertyAll(
+                                    input,
+                                  ),
+                                  shape: WidgetStatePropertyAll(
+                                    RoundedRectangleBorder(
+                                      borderRadius: BorderRadiusGeometry.all(
+                                        Radius.circular(8),
+                                      ),
+                                      side: BorderSide(color: stroke),
+                                    ),
+                                  ),
+                                ),
+                            onPressed: () {
+                              pageIndex = 2;
+                              pageController.animateToPage(
+                                pageIndex,
+                                duration: Duration(milliseconds: 200),
+                                curve: Curves.easeInOut,
+                              );
+                              textPageController.animateToPage(
+                                pageIndex,
+                                duration: Duration(milliseconds: 200),
+                                curve: Curves.easeInOut,
+                              );
+                              setState(() {});
+                            },
+                            child: Text(
+                              AppLocalizations.of(context)!.skip,
+                              style: Theme.of(context)
+                                  .primaryTextTheme
+                                  .bodyLarge!
+                                  .copyWith(fontSize: 14),
                             ),
-                            side: BorderSide(color: stroke),
                           ),
-                        ),
-                      ),
-                      onPressed: () {
-                        pageIndex = 2;
-                        pageController.animateToPage(
-                          pageIndex,
-                          duration: Duration(milliseconds: 200),
-                          curve: Curves.easeInOut,
-                        );
-                        textPageController.animateToPage(
-                          pageIndex,
-                          duration: Duration(milliseconds: 200),
-                          curve: Curves.easeInOut,
-                        );
-                        setState(() {});
-                      },
-                      child: Text(AppLocalizations.of(context)!.skip,style: Theme.of(context).primaryTextTheme.bodyLarge!.copyWith(fontSize: 14),)
-                    ),
                   ),
                 ],
               ),

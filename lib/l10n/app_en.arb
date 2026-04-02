@@ -28,5 +28,19 @@
     "alreadyHaveAnAccount" : "Already have an account? ",
     "signUpWithGoogle" : "Sign up with Google",
     "resetPassword" : "Reset password",
-    "or" : "Or"
+    "or" : "Or",
+
+    "welcomBack":"Welcome Back ✨",
+    "all":"All",
+    "sport":"Sport",
+    "bookClub":"Book Club",
+    "birthday":"Birthday",
+    "meeting":"Meeting",
+    "exhibition":"Exhibition",
+
+    "home":"Home",
+    "favourite":"Favourite",
+    "profile":"Profile",
+
+    "searchForEvent":"Search For Event"
 }

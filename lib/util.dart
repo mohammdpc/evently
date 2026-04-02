@@ -49,6 +49,18 @@ String emailIcon = 'assets/icons/sms.png';
 String passwordIcon = 'assets/icons/lock.png';
 String userIcon = 'assets/icons/user.png';
 String googleIcon = 'assets/icons/image 6.png';
+  //main screen
+String filledHeart = 'assets/icons/heart.png';
+String heart = 'assets/icons/heart-1.png';
+String home = 'assets/icons/home.png';
+String profile = 'assets/icons/user.png';
+
+String allTab = 'assets/icons/element-3.png';
+String sportsIcon = 'assets/icons/bike.png';
+String birthday = 'assets/icons/birthday-cake.png';
+String bookClub = 'assets/icons/book.png';
+String meeting = 'assets/icons/calendar-add.png';
+String exhibition = 'assets/icons/clock.png';
 
 // images paths
   //Onboarding images
@@ -59,3 +71,21 @@ String onboarding2 = 'assets/images/being-creative-1.png';
 String onboarding3 = 'assets/images/being-creative-2.png';
   //Authentication
 String forgotPasswordImage = 'assets/images/change-setting.png';
+
+  //event
+  List<String> eventImageDarkList = [
+    'assets/images/Sport.png',
+    'assets/images/Birthday.png',
+    'assets/images/Meeting.png',
+    'assets/images/Exhibition.png',
+    'assets/images/Book Club.png',
+  ];
+
+   List<String> eventImageLightList = [
+    'assets/images/Sport-1.png',
+     'assets/images/Birthday-1.png',
+    'assets/images/Meeting-1.png',
+    'assets/images/Exhibition-1.png',
+     'assets/images/Book Club-1.png',
+  ];
+  

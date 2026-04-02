@@ -59,6 +59,10 @@ ThemeData appLightTheme = ThemeData(
       borderSide: BorderSide(color: lightStroke, width: 1),
       borderRadius: BorderRadius.all(Radius.circular(16)),
     ),
+    focusedBorder: OutlineInputBorder(
+      borderSide: BorderSide(color: lightStroke, width: 1),
+      borderRadius: BorderRadius.all(Radius.circular(16)),
+    ),
     errorBorder: OutlineInputBorder(
       borderSide: BorderSide(color: red, width: 1),
       borderRadius: BorderRadius.all(Radius.circular(16)),
@@ -109,18 +113,22 @@ ThemeData appDarkTheme = ThemeData(
     contentPadding: EdgeInsets.symmetric(horizontal: 16,vertical: 12),
     filled: true,
     fillColor: darkInput,
-
+    
     hintStyle: TextStyle(
         fontWeight: FontWeight.w400,
         fontSize: 14,
         color: darkSecText
     ),
-
+    
     border: OutlineInputBorder(
       borderSide: BorderSide(color: darkStroke, width: 1),
       borderRadius: BorderRadius.all(Radius.circular(16)),
     ),
     enabledBorder: OutlineInputBorder(
+      borderSide: BorderSide(color: darkStroke, width: 1),
+      borderRadius: BorderRadius.all(Radius.circular(16)),
+    ),
+    focusedBorder: OutlineInputBorder(
       borderSide: BorderSide(color: darkStroke, width: 1),
       borderRadius: BorderRadius.all(Radius.circular(16)),
     ),
