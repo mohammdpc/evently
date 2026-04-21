@@ -42,5 +42,10 @@
     "favourite":"Favourite",
     "profile":"Profile",
 
-    "searchForEvent":"Search For Event"
+    "searchForEvent":"Search For Event",
+    "noEventFound": "no event found",
+    "addEventsToFavourite": "add Events to favourite",
+  "darkMode": "Dark Mode",
+  "logOut": "LogOut"
+
 }

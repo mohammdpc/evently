@@ -1,9 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:evently/Secondary%20Screens/event_details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:evently/util.dart';
 import 'package:intl/intl.dart';
 import '../Providers/settings_provider.dart';
-import '../models/event.dart';
+import 'package:evently/models/event.dart';
 import 'info_container.dart';
 
 class EventCard extends StatefulWidget {
@@ -25,10 +26,10 @@ class _EventCardState extends State<EventCard> {
   DateTime d = DateTime(2026,2,16,9,45,55);
   @override
   Widget build(BuildContext context) {
-    debugPrint('\n\n ${t.toDate()} \n\n');
     return InkResponse(
-
+      onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>EventDetailsScreen(event: widget.event,))),
       child: Container(
+        margin: EdgeInsetsGeometry.only(bottom: heightOf(16, context)),
         padding: EdgeInsets.all(8),
         height: heightOf(193, context),
         decoration: BoxDecoration(
@@ -51,6 +52,7 @@ class _EventCardState extends State<EventCard> {
               fill: background,
               child: Text(
                 DateFormat('d MMM').format(widget.event.eventDateAndTime),
+                style: TextStyle(fontSize: 16,fontWeight: FontWeight.w600,color: mainColor),
               ),
             ),
             InfoContainer(
@@ -59,13 +61,12 @@ class _EventCardState extends State<EventCard> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(widget.event.description),
+                  Text(widget.event.description,style: TextStyle(fontSize: 14,fontWeight: FontWeight.w500,color: mainText),),
                   InkResponse(
                     onTap: () async {
                       setState(() {
                         widget.event.favourite = !widget.event.favourite;
                       });
-                      debugPrint('\n\n ${widget.event.eventID} \n\n');
                       try {
                         await FirebaseFirestore.instance
                             .collection('users')
@@ -74,8 +75,8 @@ class _EventCardState extends State<EventCard> {
                             .doc(widget.event.eventID)
                             .update({'favourite': widget.event.favourite});
                         debugPrint('Favourite updated successfully');
-                      } catch (e) {
-                        debugPrint('\n\nFailed to update favourite: $e \n\n');
+                      } catch(e){
+                        rethrow;
                       }
                     },
                     child: Image.asset(

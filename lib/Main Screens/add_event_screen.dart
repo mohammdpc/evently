@@ -31,8 +31,8 @@ class _AddEventScreenState extends State<AddEventScreen> {
   ];
 
   final _formKey = GlobalKey<FormState>();
-  TextEditingController titleController = TextEditingController();
-  TextEditingController descriptionController = TextEditingController();
+  late TextEditingController titleController ;
+  late TextEditingController descriptionController;
 
   int eventTypeIndex = 0;
   int selectedIndex = 0;
@@ -42,6 +42,8 @@ class _AddEventScreenState extends State<AddEventScreen> {
 
   @override
   void initState() {
+    titleController = TextEditingController();
+    descriptionController = TextEditingController();
     if (widget.e != null) {
       eventTypeIndex = widget.e!.eventTypeIndex;
       selectedIndex = widget.e!.eventTypeIndex;
@@ -53,10 +55,17 @@ class _AddEventScreenState extends State<AddEventScreen> {
         millisecond: 0,
       );
       time = TimeOfDay.fromDateTime(widget.e!.eventDateAndTime);
-
-      debugPrint('\n\n ${date.toString()} \n\n ${time.toString()} \n\n');
+      titleController.text = widget.e!.title;
+      descriptionController.text = widget.e!.description;
     }
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    titleController.dispose();
+    descriptionController.dispose();
+    super.dispose();
   }
 
   @override
@@ -213,6 +222,7 @@ class _AddEventScreenState extends State<AddEventScreen> {
                     if (date != null && time != null) {
                       widget.action(
                         Event(
+                          eventID: widget.e == null? '-1':widget.e!.eventID,
                           title: titleController.text,
                           description: descriptionController.text,
                           eventDateAndTime: date!.add(
@@ -225,7 +235,7 @@ class _AddEventScreenState extends State<AddEventScreen> {
                     }
                   }
                 },
-                text: 'Add Event',
+                text: widget.e == null?'Add Event':'Update event',
               ),
             ],
           ),

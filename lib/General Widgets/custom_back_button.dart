@@ -4,7 +4,8 @@ import '../Providers/settings_provider.dart';
 
 class CustomBackButton extends StatelessWidget {
   final VoidCallback action;
-  const CustomBackButton({super.key, required this.action});
+  final Widget? icon;
+  const CustomBackButton({super.key, required this.action,this.icon});
 
   @override
   Widget build(BuildContext context) {
@@ -13,12 +14,12 @@ class CustomBackButton extends StatelessWidget {
       height: screenWidth(context) * 0.085333333,
       child: FilledButton(
         style: Theme.of(context).filledButtonTheme.style!.copyWith(
-          padding: WidgetStatePropertyAll(
+          padding: icon == null?WidgetStatePropertyAll(
             EdgeInsets.symmetric(
               horizontal: screenWidth(context) * 0.029333333,
               vertical: screenHeight(context) * 0.009852217,
             ),
-          ),
+          ):null,
           backgroundColor: WidgetStatePropertyAll(input),
           shape: WidgetStatePropertyAll(
             RoundedRectangleBorder(
@@ -30,7 +31,7 @@ class CustomBackButton extends StatelessWidget {
           ),
         ),
         onPressed: action,
-        child: Icon(
+        child: icon ?? Icon(
           Icons.arrow_back_ios,
           color: setting.theme ? mainColor : lightInput,
           weight: screenWidth(context) * 0.018933333,

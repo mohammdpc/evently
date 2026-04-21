@@ -1,13 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:evently/Main%20Screens/add_event_screen.dart';
+import 'package:evently/Main%20Screens/favourite_screen.dart';
+import 'package:evently/Main%20Screens/profile_screen.dart';
 import 'package:evently/Providers/settings_provider.dart';
-import 'package:evently/l10n/app_localizations.dart';
 import 'package:evently/models/event.dart';
 import 'package:flutter/material.dart';
 
 import '../util.dart';
 import 'home_screen.dart';
-
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -19,19 +19,23 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   final Stream _usersStream = FirebaseFirestore.instance
       .collection('users')
-      .doc(setting.userID).collection('events')
+      .doc(setting.userID)
+      .collection('events')
       .snapshots();
   int navIndex = 0;
 
-  void addEvent(Event e) async{
-   await FirebaseFirestore.instance
+  void addEvent(Event e) async {
+    await FirebaseFirestore.instance
         .collection('users')
-        .doc(setting.userID).collection('events').doc().set(e.toJson());
+        .doc(setting.userID)
+        .collection('events')
+        .doc()
+        .set(e.toJson());
     Navigator.pop(context);
   }
+
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       body: SafeArea(
         minimum: EdgeInsets.only(
@@ -55,27 +59,24 @@ class _MainScreenState extends State<MainScreen> {
 
             final docs = querySnapshot.docs;
 
-            if (docs.isEmpty) {
-              return Text('error');
-            }
+
+            List<Event> eventList = docs.map((doc) {
+              final data = doc.data() as Map<String, dynamic>;
+              String eventID = doc.id;
+              return Event(
+                eventID: eventID,
+                title: data['title'],
+                description: data['description'],
+                eventDateAndTime: (data['dateTime'] as Timestamp).toDate(),
+                eventTypeIndex: data['name'],
+                favourite: data['favourite'],
+              );
+            }).toList();
+
             return [
-              HomeScreen(
-                eventsList: docs.map((doc) {
-                  final data = doc.data() as Map<String, dynamic>;
-                  debugPrint('\n\n eventID: ${doc.id} \n\n');
-                  return Event(
-                    eventID: doc.id,
-                    title: data['title'],
-                    description: data['description'],
-                    eventDateAndTime:
-                    (data['dateTime'] as Timestamp).toDate(),
-                    eventTypeIndex: data['name'],
-                    favourite: data['favourite'],
-                  );
-                }).toList(),
-              ),
-              Placeholder(),
-              Placeholder(),
+              HomeScreen(eventsList: eventList),
+              FavouriteScreen(eventList: eventList),
+              ProfileScreen(),
             ][navIndex];
           },
         ),
@@ -90,6 +91,7 @@ class _MainScreenState extends State<MainScreen> {
         ),
         clipBehavior: Clip.antiAlias,
         child: BottomNavigationBar(
+          useLegacyColorScheme: false,
           backgroundColor: setting.theme ? Colors.white : darkBackground,
           currentIndex: navIndex,
           selectedLabelStyle: TextStyle(
@@ -100,7 +102,7 @@ class _MainScreenState extends State<MainScreen> {
           unselectedLabelStyle: TextStyle(
             fontWeight: FontWeight.w400,
             fontSize: 12,
-            color: disableColor,
+            color: lightDisable,
           ),
           items: [
             BottomNavigationBarItem(
@@ -158,7 +160,11 @@ class _MainScreenState extends State<MainScreen> {
             builder: (BuildContext context) => AddEventScreen(action: addEvent),
           ),
         ),
-        child: Icon(Icons.add_rounded,color: Colors.white,weight: widthOf(24, context),),
+        child: Icon(
+          Icons.add_rounded,
+          color: Colors.white,
+          weight: widthOf(24, context),
+        ),
       ),
     );
   }

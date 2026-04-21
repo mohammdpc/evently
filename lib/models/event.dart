@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Event {
-  late final String? eventID;
+  late final String eventID;
   late String title;
   late String description;
   late DateTime eventDateAndTime;
@@ -14,7 +14,7 @@ class Event {
     required this.eventDateAndTime,
     required this.eventTypeIndex,
     required this.favourite,
-    this.eventID
+    required this.eventID
   });
 
   Event.formMap(Map<String, dynamic> data, this.eventID) {

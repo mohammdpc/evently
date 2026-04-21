@@ -42,5 +42,9 @@
     "favourite":"المفضلة",
     "profile":"الملف الشخصي",
 
-    "searchForEvent":"البحث عن فعالية"
+    "searchForEvent":"البحث عن فعالية",
+    "noEventFound": "لم يتم العثور على أي حدث،",
+    "addEventsToFavourite": "إضافة أحداث إلى المفضلة",
+  "darkMode": "الوضع الداكن",
+  "logOut": "تسجيل الخروج"
 }

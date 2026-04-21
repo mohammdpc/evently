@@ -9,7 +9,10 @@ class InputField extends StatefulWidget {
   final String? iconPath;
   final String hintText;
    Widget? suffix;
+   Widget? suffixIcon;
+   Function? onChange;
   final Function(String?) validator;
+
   final TextEditingController controller;
   InputField({
     super.key,
@@ -18,9 +21,10 @@ class InputField extends StatefulWidget {
     required this.validator,
     required this.controller,
     this.suffix,
+    this.suffixIcon,
     this.obscure = false,
-    this.expand = false
-
+    this.expand = false,
+    this.onChange
   });
 
   @override
@@ -37,7 +41,10 @@ class _InputFieldState extends State<InputField> {
 
     return TextFormField(
       controller: widget.controller,
-      onChanged: (v)=>widget.controller.text = v,
+      onChanged: (v) {
+        widget.controller.text = v;
+        widget.onChange != null?widget.onChange!():null;
+      },
       expands: widget.expand,
       maxLines: widget.expand?null:1,
       textAlignVertical: TextAlignVertical.top,
@@ -54,8 +61,9 @@ class _InputFieldState extends State<InputField> {
         prefixIconConstraints: prefixConstraints,
         contentPadding: EdgeInsets.all(16),
         hintText: widget.hintText,
-        //suffix: widget.suffix,
+        suffix: widget.suffixIcon,
         suffixIcon: widget.suffix,
+        //suffixIconConstraints: BoxConstraints(maxHeight: heightOf(24, context),maxWidth: widthOf(24, context))
       ),
       obscureText: widget.obscure,
       validator: (v) => widget.validator(v),

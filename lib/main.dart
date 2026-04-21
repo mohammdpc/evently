@@ -8,10 +8,10 @@ import 'firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 //providers
-import 'Providers/settings_provider.dart';
+import 'package:evently/Providers/settings_provider.dart';
 //screens
 import 'Onboarding/onboarding.dart';
-import 'Authentication/log_in.dart';
+import 'Authentication/login/log_in.dart';
 import 'Main Screens/main_screen.dart';
 //theme
 import 'theme.dart';
@@ -20,14 +20,15 @@ import 'theme.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
+  SharedPreferences db = await SharedPreferences.getInstance();
+
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   //FirebaseAuth.instance;
-
-  SharedPreferences db = await SharedPreferences.getInstance();
-  setting = SettingsProvider(db);
   runApp(
     MultiProvider(
-      providers: [ChangeNotifierProvider.value(value: setting)],
+      providers: [ChangeNotifierProvider(
+        create: (_) => SettingsProvider(db),
+      ),],
       child: const MyApp(),
     ),
   );
@@ -43,18 +44,19 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   // This widget is the root of your application.
   Widget mainPage() {
-
     if (setting.onboarding) {
       return OnboardingMain();
-    } else if(setting.user == null){
+    } else if (setting.user == null) {
       return LogInScreen();
-    }else{
+    } else {
       return MainScreen();
     }
   }
 
+
   @override
   Widget build(BuildContext context) {
+    setting = context.watch<SettingsProvider>();
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Evently',

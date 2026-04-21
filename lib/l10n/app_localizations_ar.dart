@@ -131,4 +131,16 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get searchForEvent => 'البحث عن فعالية';
+
+  @override
+  String get noEventFound => 'لم يتم العثور على أي حدث،';
+
+  @override
+  String get addEventsToFavourite => 'إضافة أحداث إلى المفضلة';
+
+  @override
+  String get darkMode => 'الوضع الداكن';
+
+  @override
+  String get logOut => 'تسجيل الخروج';
 }

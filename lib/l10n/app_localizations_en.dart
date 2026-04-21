@@ -131,4 +131,16 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get searchForEvent => 'Search For Event';
+
+  @override
+  String get noEventFound => 'no event found';
+
+  @override
+  String get addEventsToFavourite => 'add Events to favourite';
+
+  @override
+  String get darkMode => 'Dark Mode';
+
+  @override
+  String get logOut => 'LogOut';
 }

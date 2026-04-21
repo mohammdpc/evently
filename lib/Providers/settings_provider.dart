@@ -1,9 +1,11 @@
+import 'package:evently/Authentication/login/log_in.dart';
 import 'package:evently/models/event.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../models/user.dart';
+import 'package:evently/models/user.dart';
 
 class SettingsProvider extends ChangeNotifier {
   static bool _en = true;
@@ -11,6 +13,7 @@ class SettingsProvider extends ChangeNotifier {
   static bool _onboarding = true;
   static bool _registered = false;
   UserModel? user;
+  String userEmail = '';
   late SharedPreferences _db;
 
   bool get language => _en;
@@ -86,10 +89,19 @@ class SettingsProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void deleteUser(){
+  void deleteUser(BuildContext context) {
     _db.remove('UserID');
     _db.remove('User Name');
     _db.remove('registered');
+    userEmail = '';
+    user = null;
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute<void>(
+        builder: (BuildContext context) => LogInScreen(),
+      ),
+      ModalRoute.withName('/'),
+    );
   }
 }
 

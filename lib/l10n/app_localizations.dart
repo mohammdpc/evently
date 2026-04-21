@@ -337,6 +337,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Search For Event'**
   String get searchForEvent;
+
+  /// No description provided for @noEventFound.
+  ///
+  /// In en, this message translates to:
+  /// **'no event found'**
+  String get noEventFound;
+
+  /// No description provided for @addEventsToFavourite.
+  ///
+  /// In en, this message translates to:
+  /// **'add Events to favourite'**
+  String get addEventsToFavourite;
+
+  /// No description provided for @darkMode.
+  ///
+  /// In en, this message translates to:
+  /// **'Dark Mode'**
+  String get darkMode;
+
+  /// No description provided for @logOut.
+  ///
+  /// In en, this message translates to:
+  /// **'LogOut'**
+  String get logOut;
 }
 
 class _AppLocalizationsDelegate
